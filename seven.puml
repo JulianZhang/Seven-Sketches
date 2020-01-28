@@ -1,0 +1,24 @@
+@startuml
+class generative_effects
+{
+size()
+}
+note top of generative_effects
+  the less structure is preserved by our observation of
+  a system, the more “surprises” occur when we observe
+  its operations. One might call these surprises
+  generative effects. p2
+end note
+
+generative_effects --|> Ada17 : Describe in
+
+class Ada17{
+PhD thesis
+}
+note top of Ada17
+    “Systems, Generativity and Interactional Effects”.
+    Available online:
+    http://www.mit.edu/~eadam/eadam_PhDThesis.pdf.
+    PhD thesis. Massachusetts Institute of Technology
+end note
+@enduml

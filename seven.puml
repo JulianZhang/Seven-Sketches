@@ -21,4 +21,68 @@ note top of Ada17
     http://www.mit.edu/~eadam/eadam_PhDThesis.pdf.
     PhD thesis. Massachusetts Institute of Technology
 end note
+
+class partition{
+  List<Set> partSets
+}
+partition -- equivalence_relation : one-to-one correspondence
+class equivalence_relation{
+reflexivity()
+symmetry()
+transitivity()
+}
+
+class quotient
+quotient --|>  partition : a instance
+equivalence_relation ..> quotient : generate
+
+note top of preorder
+    A preorder relation on a set X is a binary relation on X,
+    here denoted with infix notation ≤, such that
+    (a) x ≤ x; and
+    (b) if x ≤ y and y ≤ z, then x ≤ z.
+    The first condition is called reflexivity and the second
+    is called transitivity.
+    If x ≤ y and y ≤ x, we write x  y and say x and y are equivalent.
+    We call a pair (X, ≤) consisting of a set equipped with a preorder
+     relation a preorder.
+end note
+class preorder{
+reflexivity()
+transitivity()
+}
+
+class monotone_map{
+transitivity()
+}
+
+preorder o-- monotone_map : functor
+
+interface yoneda_lemma{
+}
+
+note "know an element is the same \n as  know it's upper set" as yoneda_lemma_on_preorder
+preorder .. yoneda_lemma_on_preorder
+yoneda_lemma_on_preorder .. yoneda_lemma
+
+'class surjective{
+'}
+'surjective -- monotone_map : surjective with backwards\n get monotone_map on partition
+
+
+note " when map din't keep join\n then it have GE" as broke_join
+monotone_map .. broke_join
+broke_join .. generative_effects
+
+class Galois_connection{
+   monotone_map f
+   monotone_map g
+}
+note top of Galois_connection
+  A Galois connection between preorders
+   P and Q is a pair of monotone maps f : P → Q
+   and g : Q → P such that f (p) ≤ q if and only if p ≤ g(q).
+  f is the left adjoint and g is the right adjoint of
+  the Galois connection.
+end note
 @enduml

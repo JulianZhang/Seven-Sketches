@@ -84,5 +84,134 @@ note top of Galois_connection
    and g : Q → P such that f (p) ≤ q if and only if p ≤ g(q).
   f is the left adjoint and g is the right adjoint of
   the Galois connection.
+  also name as adjunction
 end note
+class closure_operator{
+(a) p ≤ j(p)
+(b) j(j(p)) ~= j(p).
+}
+closure_operator --|> monotone_map : on same preorder
+Galois_connection *-- monotone_map
+
+class V_category {
+symmetric_monoidal_preorder V
+Ob[X] objects
+X[x,y] homobject
+I ≤ X(x,x)
+X(x,y)⊗X(y,z)≤X(x,z)
+}
+note top of V_category
+a set of objects,
+which may think of as points on a map,
+where V somehow “structures the question”
+of getting from point a to point b.
+
+V the base of the enrichment for X
+or X is enriched in V.
+end note
+
+V_category *-- symmetric_monoidal_preorder
+
+class symmetric_monoidal_preorder{
+element monoidal_unit
+function monoidal_product
+monotonicity()
+unitality()
+associativity()
+symmetry()
+}
+
+symmetric_monoidal_preorder --|> preorder
+
+class monoidal_monotone_map{
+    monoidal_preorder P
+    monoidal_preorder Q
+    monotone_map f:P->Q
+    IQ ≤Q f (IP)
+    f (p1) ⊗Q f (p2) ≤Q f (p1 ⊗P p2)
+}
+
+monoidal_monotone_map --|> monotone_map
+monoidal_monotone_map *-- symmetric_monoidal_preorder
+
+class strong_monoidal_monotone{
+    IQ ~=Q f (IP)
+    f (p1) ⊗Q f (p2) ~=Q f (p1 ⊗P p2)
+}
+
+strong_monoidal_monotone --|> monoidal_monotone_map
+
+class strict_monoidal_monotone{
+    IQ =Q f (IP)
+    f (p1) ⊗Q f (p2) =Q f (p1 ⊗P p2)
+}
+
+strict_monoidal_monotone --|> strong_monoidal_monotone
+
+class Lawvere_metric_spaces{
+element points
+function d[x,y]
+d(x,x)=d
+if d(x,y)=0 then x=y
+d(x,y)=d(y,x)
+d(x,y) + d(y,z) ≥ d(x,z)
+}
+Lawvere_metric_spaces --|> V_category : a Cost category
+
+class V_product{
+V_category X
+V_category Y
+Ob(X × Y) := Ob(X) × Ob(Y)
+(X × Y)((x, y),(x0,y0)) := X(x, x0 ) ⊗ Y(y, y0)
+}
+V_product --|> V_category
+V_product *-- V_category
+
+class closed{
+hom-element  v-ow
+(a ⊗ v) ≤ w iff a ≤ (v -o w)
+}
+closed --|> symmetric_monoidal_preorder
+
+class unital_commutative_quantale{
+0 := U empty()
+}
+unital_commutative_quantale --|> closed : has all join
+class category{
+element objects
+morphism morphisms
+morphism identity_morphism
+function composite
+unitality()
+associativity()
+}
+
+class morphism{
+}
+category *-- morphism
+
+class isomorphism {
+}
+isomorphism --|> morphism
+
+class free_category_on_G{
+graph G[]
+}
+note top of free_category_on_G
+objects are the vertices V
+morphisms from c to d are the paths from c to d.
+identity morphism on an object c is trivial path at c.
+Composition is given by concatenation of paths.
+end note
+
+free_category_on_G --|> category
+
+note "A preorder is a category where \nevery two parallel arrows \nare the same. \nConsidering a preorder as a category \nis right adjoint to turning a category \ninto a preorder by preorder reflection." as preorder_category
+preorder -- preorder_category
+preorder_category -- category
+
+class finite_presentation{
+Equations path_equation
+}
+finite_presentation --|> free_category_on_G
 @enduml

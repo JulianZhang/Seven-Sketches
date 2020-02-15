@@ -214,4 +214,38 @@ class finite_presentation{
 Equations path_equation
 }
 finite_presentation --|> free_category_on_G
+class functor {
+category C
+category D
+F(c) ∈ Ob(D)
+F(f):F(c1)->F(c2)
+F(id c) =id F(c)
+F(f;g) = F(f);F(g)
+}
+functor *-- category
+monotone_map --|>functor
+class natural_transformation{
+category C
+category D
+functor F
+functor G
+αc:F(c)->G(c)
+F(f);αd=αc;G(f)
+}
+natural_transformation *-- functor
+class functor_category{
+objects functor
+morphism natural_transformation
+}
+functor_category *-- functor
+functor_category --|> category
+class adjunctions{
+category C
+category D
+functor L
+functor R
+α(c,d) : C(c, R(d)) −→ D(L(c), d)
+}
+adjunction --|> functor
+
 @enduml

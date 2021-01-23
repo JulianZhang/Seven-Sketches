@@ -239,7 +239,7 @@ morphism natural_transformation
 }
 functor_category *-- functor
 functor_category --|> category
-class adjunctions{
+class adjunction{
 category C
 category D
 functor L
@@ -247,5 +247,7 @@ functor R
 α(c,d) : C(c, R(d)) −→ D(L(c), d)
 }
 adjunction --|> functor
+
+
 
 @enduml
